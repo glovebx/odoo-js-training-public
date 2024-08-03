@@ -94,7 +94,7 @@ more focused on the SPA aspect of Odoo.
 One can think of the Odoo web client as being built with four layers:
 可以将 Odoo Web 客户端视为由四个层级构建：
 
-![104](notes/104.png)
+![105](notes/105.png)
 
 - `web client`: it is the presentation layer that describes the
   user interface (navbar, action system, ...)
@@ -117,7 +117,22 @@ Most of the time, javascript (and other assets) code should be structured like
 this:
 大多数情况下，JavaScript（和其他资产）代码应该按以下结构组织：
 
-![105](notes/105.png)
+```
+/static/
+    src/
+        notifications/
+            notification_service.js
+            notification.js
+            notification.xml
+            notification.scss
+        some_component.js
+        some_component.xml
+        ...
+    tests/
+        helpers.js
+        notification_tests.js
+        ...
+```
 
 Note that we don't have the `js/`, `scss`, or `xml` folder anymore. Code is
 grouped by concern. Tests should be located in a `static/tests` folder.
