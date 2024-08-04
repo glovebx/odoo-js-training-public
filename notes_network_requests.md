@@ -4,9 +4,11 @@
 A web app such as the Odoo web client would not be very useful if it was unable
 to talk to the server. Loading data and calling model methods from the browser
 is a very common need.
+
 如果一个 Web 应用程序（例如 Odoo Web 客户端）无法与服务器通信，它将毫无用处。从浏览器加载数据和调用模型方法是一个非常常见的需求。
 
 Roughly speaking, there are two different kind of requests:
+
 粗略地说，有两种不同的请求类型：
 
 - calling a controller (an arbitrary route)
@@ -16,6 +18,7 @@ Roughly speaking, there are two different kind of requests:
 - 调用模型上的方法（`/web/dataset/call_kw/some_model/some_method`）。这将调用对应方法的 Python 代码，并返回结果。
 
 In odoo these two kind of requests are done with `XmlHTTPRequest`s, in `jsonrpc`.
+
 在 Odoo 中，这两种请求都是通过 `XmlHTTPRequest` 的 `jsonrpc` 来完成的。
 
 ## Calling a method on a model (orm service)
@@ -23,10 +26,12 @@ In odoo these two kind of requests are done with `XmlHTTPRequest`s, in `jsonrpc`
 
 Let us first see the most common request: calling a method on a model. This is
 usually what we need to do.
+
 让我们首先看看最常见的请求：调用模型上的方法。这通常是我们需要做的。
 
 There is a service dedicated to do just that: `orm_service`, located in `core/orm_service.js`
 It provides a way to call common model methods, as well as a generic `call` method:
+
 有一个专门用于执行此操作的服务：`orm_service`，它位于 `core/orm_service.js` 中。它提供了一种调用常见模型方法的方法，以及一个通用的 `call` 方法：
 
 ```js
@@ -42,6 +47,7 @@ setup() {
 ```
 
 Here is a list of its various methods:
+
 以下是它的各种方法列表：
 
 - `create(model, records, kwargs)`
@@ -57,19 +63,22 @@ Here is a list of its various methods:
 - `write(model, ids, data, kwargs)`
 
 Also, in case one needs to call an arbitrary method on a model, there is:
+
 此外，如果需要在模型上调用任意方法，可以使用：
 
 - `call(model, method, args, kwargs)`
 
 Note that the specific methods should be preferred, since they can perform some
 light validation on the shape of their arguments.
-请注意，应该优先使用特定的方法，因为它们可以对参数的形态进行一些轻微验证。
+
+请注意，应该优先使用特定的方法，因为它们可以对参数的形态进行一些轻量化验证。
 
 ## Calling a controller (rpc service)
 ## 调用控制器（RPC 服务）
 
 Whenever we need to call a specific controller, we need to use the (low level)
 `rpc` service. It only exports a single function that perform the request:
+
 无论何时需要调用特定控制器，都需要使用（底层）`rpc` 服务。它只导出一个执行请求的函数：
 
 ```
@@ -77,6 +86,7 @@ rpc(route, params, settings)
 ```
 
 Here is a short explanation on the various arguments:
+
 以下是各个参数的简要说明：
 
 - `route` is the target route, as a string. For example `/myroute/`
@@ -88,6 +98,7 @@ Here is a short explanation on the various arguments:
 - `settings`（可选），用于对请求进行一些高级控制（使其静默，或使用特定的 xhr 实例）。
 
 For example, a basic request could look like this:
+
 例如，一个基本请求可能看起来像这样：
 
 ```js
@@ -99,3 +110,6 @@ setup() {
     });
 }
 ```
+
+
+![contact](notes/contact.png)
